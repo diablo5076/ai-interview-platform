@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Interview" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN     "duration" INTEGER,
+ADD COLUMN     "level" TEXT,
+ADD COLUMN     "role" TEXT;
