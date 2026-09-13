@@ -1,6 +1,6 @@
-import axios from "axios";
+import api from "@/lib/axios";
 
-export const uploadResume = async(
+export const uploadResume = async (
   file: File,
   token: string
 ) => {
@@ -8,8 +8,8 @@ export const uploadResume = async(
 
   formData.append("resume", file);
 
-  const response = await axios.post(
-    "http://localhost:5000/api/resume/upload",
+  const response = await api.post(
+    "/resume/upload",
     formData,
     {
       headers: {
@@ -19,11 +19,11 @@ export const uploadResume = async(
   );
 
   return response.data;
-}
+};
 
 export const getResumes = async (token: string) => {
-  const response = await axios.get(
-    "http://localhost:5000/api/resume",
+  const response = await api.get(
+    "/resume",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -32,14 +32,14 @@ export const getResumes = async (token: string) => {
   );
 
   return response.data;
-}
+};
 
 export const getResumeById = async (
   id: string,
   token: string
 ) => {
-  const response = await axios.get(
-    `http://localhost:5000/api/resume/${id}`,
+  const response = await api.get(
+    `/resume/${id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

@@ -20,19 +20,14 @@ interface LoginForm {
 export default function LoginPage() {
   const router = useRouter();
 
-  const setToken = useAuthStore(
-    (state) => state.setToken
-  );
+  const setToken = useAuthStore((state) => state.setToken);
 
   const { initializeAuth } = useAuth();
 
   const {
     register,
     handleSubmit,
-    formState: {
-      errors,
-      isSubmitting,
-    },
+    formState: { errors, isSubmitting },
   } = useForm<LoginForm>({
     defaultValues: {
       email: "",
@@ -61,15 +56,12 @@ export default function LoginPage() {
             )?.message
           : undefined;
 
-      toast.error(
-        message ?? "Login failed"
-      );
+      toast.error(message ?? "Login failed");
     }
   };
 
   const handleGoogleLogin = () => {
-    window.location.href =
-      "http://localhost:5000/api/auth/google";
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`;
   };
 
   return (
@@ -82,8 +74,6 @@ export default function LoginPage() {
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-5"
       >
-        {/* Email */}
-
         <Input
           type="email"
           placeholder="Enter your email"
@@ -92,15 +82,11 @@ export default function LoginPage() {
           {...register("email", {
             required: "Email is required",
             pattern: {
-              value:
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message:
-                "Please enter a valid email address",
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Please enter a valid email address",
             },
           })}
         />
-
-        {/* Password */}
 
         <Input
           type="password"
@@ -111,13 +97,10 @@ export default function LoginPage() {
             required: "Password is required",
             minLength: {
               value: 6,
-              message:
-                "Password must be at least 6 characters",
+              message: "Password must be at least 6 characters",
             },
           })}
         />
-
-        {/* Email Login */}
 
         <Button
           type="submit"
@@ -127,19 +110,11 @@ export default function LoginPage() {
           Login
         </Button>
 
-        {/* Divider */}
-
         <div className="flex items-center gap-4">
           <div className="h-px flex-1 bg-zinc-800" />
-
-          <span className="text-xs font-medium text-zinc-500">
-            OR
-          </span>
-
+          <span className="text-xs font-medium text-zinc-500">OR</span>
           <div className="h-px flex-1 bg-zinc-800" />
         </div>
-
-        {/* Google Login */}
 
         <button
           type="button"
@@ -166,8 +141,6 @@ export default function LoginPage() {
             disabled:opacity-50
           "
         >
-          {/* Google Icon */}
-
           <svg
             className="h-5 w-5"
             viewBox="0 0 24 24"
@@ -177,17 +150,14 @@ export default function LoginPage() {
               fill="#4285F4"
               d="M21.35 12.27c0-.79-.07-1.55-.2-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.7 2.91-4.2 2.91-7.42z"
             />
-
             <path
               fill="#34A853"
               d="M12 21.75c2.63 0 4.84-.87 6.45-2.36l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.53A9.75 9.75 0 0 0 12 21.75z"
             />
-
             <path
               fill="#FBBC05"
               d="M6.54 13.83A5.86 5.86 0 0 1 6.23 12c0-.64.11-1.26.31-1.83V7.64H3.3A9.75 9.75 0 0 0 2.25 12c0 1.57.38 3.05 1.05 4.36l3.24-2.53z"
             />
-
             <path
               fill="#EA4335"
               d="M12 6.14c1.43 0 2.72.49 3.74 1.45l2.8-2.8C16.83 3.18 14.63 2.25 12 2.25A9.75 9.75 0 0 0 3.3 7.64l3.24 2.53C7.31 7.86 9.46 6.14 12 6.14z"
@@ -197,11 +167,8 @@ export default function LoginPage() {
           Continue with Google
         </button>
 
-        {/* Signup */}
-
         <p className="text-center text-sm text-zinc-400">
           Don&apos;t have an account?{" "}
-
           <Link
             href="/signup"
             className="
